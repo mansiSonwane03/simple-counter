@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter using HTML</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+            border: 1px solid #333;
+            width: 80%;
+            max-width: 600px;
+        }
+        #error-message {
+            color: red;
+            visibility: hidden;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: transparent;
+            color: white;
+            border: 1px solid #777;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #333;
+        }
+        #clear-btn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Counter using HTML</h1>
+    <div id="counter-display">Your Current Count is : 0</div>
+    <div id="error-message">Error : Cannot go below 0</div>
+
+    <div class="buttons">
+        <button id="decrement-btn">Decrement</button>
+        <button id="increment-btn">Increment</button>
+        <button id="clear-btn">Clear</button>
+    </div>
+</div>
+
+<script>
+    let count = 0;
+
+    const display = document.getElementById('counter-display');
+    const errorMsg = document.getElementById('error-message');
+    const incBtn = document.getElementById('increment-btn');
+    const decBtn = document.getElementById('decrement-btn');
+    const clearBtn = document.getElementById('clear-btn');
+
+    function updateUI() {
+        // Update the display text
+        display.innerHTML = `Your Current Count is : ${count}`;
+        
+        // Hide error message on any valid change
+        errorMsg.style.visibility = "hidden";
+
+        // Handle Clear button visibility
+        if (count > 0) {
+            clearBtn.style.display = "block";
+        } else {
+            clearBtn.style.display = "none";
+        }
+    }
+
+    incBtn.addEventListener('click', () => {
+        count++;
+        updateUI();
+    });
+
+    decBtn.addEventListener('click', () => {
+        if (count > 0) {
+            count--;
+            updateUI();
+        } else {
+            errorMsg.style.visibility = "visible";
+        }
+    });
+
+    clearBtn.addEventListener('click', () => {
+        count = 0;
+        updateUI();
+    });
+</script>
+
+</body>
+</html>
